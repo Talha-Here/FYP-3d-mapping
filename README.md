@@ -30,6 +30,14 @@ The system then assesses the scale consistency of the reconstructed model, calcu
 6. **Model Output:**  
    Convert the 3D model into a format suitable for visualization on the frontend.
 
+## Hardware Design
+To automate video recording at a constant speed without human interaction, a basic control circuit is designed featuring:
+- **Arduino Nano:** Acts as the main controller, managing the DC motor’s speed and direction.
+- **DC Motor:** Drives the movement at a constant speed, controlled by the Arduino Nano through appropriate signals.
+- **Buck Converter:** Reduces the input 12V power supply to levels suitable for both the Arduino Nano and the motor.
+
+The Arduino Nano takes input and performs control actions based on programmed instructions, which may include controlling the motor’s speed or switching it on and off, ensuring smooth operation.
+
 ## Usage
 1. **Recording:**  
    Record video synchronized with IMU data using the "OpenCamera Sensors" app.
