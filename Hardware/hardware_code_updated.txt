@@ -1,0 +1,40 @@
+#include <Servo.h>
+
+Servo srituhobby1;
+
+int button1Pin = 2;
+int button1State = 0;
+float currentAngle = 0.0;
+int targetAngle = 0;
+
+void setup() {
+  srituhobby1.attach(4);
+  pinMode(button1Pin, INPUT_PULLUP);
+  Serial.begin(9600);
+  srituhobby1.write(currentAngle); // Initialize the servo position
+}
+
+void loop() {
+  button1State = digitalRead(button1Pin);
+
+  if (button1State == LOW) { // Button pressed (assuming pull-up resistor)
+    targetAngle = 180; // Set target position to 120 degrees
+    Serial.println("Button pressed: Moving servo to 120 degrees");
+  } else {
+    targetAngle = 0; // Set target position to 0 degrees
+    Serial.println("Button released: Moving servo to 0 degrees");
+  }
+
+  // Move the servo gradually to the target position
+  if (currentAngle < targetAngle) {
+    currentAngle+=0.5;
+    srituhobby1.write(currentAngle);
+    delay(100); // Adjust delay to control the speed (larger delay = slower speed)
+  } else if (currentAngle > targetAngle) {
+    currentAngle-=0.5;
+    srituhobby1.write(currentAngle);
+    delay(100); // Adjust delay to control the speed (larger delay = slower speed)
+  }
+
+  delay(50); // Short delay to debounce the button
+}
